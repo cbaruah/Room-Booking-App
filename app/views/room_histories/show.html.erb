@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Room no:</strong>
+  <%= @room_history.room_no %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @room_history.user_id %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @room_history.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @room_history.end_time %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @room_history.status %>
+</p>
+
+<%= link_to 'Edit', edit_room_history_path(@room_history) %> |
+<%= link_to 'Back', room_histories_path %>

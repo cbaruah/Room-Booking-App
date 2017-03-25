@@ -1,0 +1,45 @@
+<p>
+  <strong>Room No:</strong>
+  <%= @room.room_no %>
+</p>
+
+<p>
+  <strong>Building:</strong>
+  <%= @room.building %>
+</p>
+
+<p>
+  <strong>Size</strong>
+  <%= @room.size %>
+</p>
+
+<hr>
+
+<h3>Room History</h3>
+
+<% if !@room.histories.first.nil? %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Name:</th>
+        <th>Email:</th>
+        <th>Booking Time</th>
+        <th>Releasing Time</th>
+      </tr>
+      </thead>
+
+      <% @room.histories.order("created_at DESC").each do |x| %>
+          <tr>
+            <td><%= x.user.name%></td>
+            <td><%= x.user.email%></td>
+            <td><%= x.user.created_at%></td>
+            <td><%= x.user.updated_at%></td>
+          </tr>
+      <% end %>
+    </table>
+<% else %>
+    <h3>No record found</h3>
+<% end %>
+
+
+<%= link_to 'Back', root_path %>

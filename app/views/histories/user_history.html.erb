@@ -1,0 +1,46 @@
+<% if current_user.try(:admin?) %>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @user.name %>
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
+
+<% end %>
+
+<hr>
+
+<h3>Booking History</h3>
+
+<% if !@user.histories.first.nil? %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Room No.</th>
+        <th>Building</th>
+        <th>Start time</th>
+        <th>End time</th>
+        <th>Release Room</th>
+      </tr>
+      </thead>
+
+    <% @user.histories.order("created_at DESC").each do |x| %>
+      <tr>
+        <td><%= x.room.room_no%></td>
+        <td><%= x.room.building%></td>
+        <td><%= x.room.created_at%></td>
+        <td><%= x.room.updated_at%></td>
+        <td><% if x.status == 1 %><%= link_to 'Release', update_history_path(x), data: {confirm: 'Release Room?'} %><% end %></td>
+      </tr>
+    <% end %>
+    </table>
+<% else %>
+  <h3>No record found</h3>
+<% end %>
+
+
+<%= link_to 'Back', root_path %>

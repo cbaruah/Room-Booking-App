@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Room no:</strong>
+  <%= @room_reserf.room_no %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @room_reserf.user_id %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @room_reserf.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @room_reserf.end_time %>
+</p>
+
+<%= link_to 'Edit', edit_room_reserf_path(@room_reserf) %> |
+<%= link_to 'Back', room_reserves_path %>

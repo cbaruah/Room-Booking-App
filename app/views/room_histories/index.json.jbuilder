@@ -1,0 +1,1 @@
+json.array! @room_histories, partial: 'room_histories/room_history', as: :room_history

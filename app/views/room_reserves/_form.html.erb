@@ -1,0 +1,14 @@
+<%= simple_form_for(@room_reserf) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :room_id %>
+    <%= f.input :user_id %>
+    <%= f.input :start_time %>
+    <%= f.input :end_time %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

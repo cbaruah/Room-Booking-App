@@ -1,0 +1,60 @@
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Book Rooms</h1>
+<table width = "30%">
+  <thead>
+    <tr><th>Search Results</th></tr>
+    <tr>
+      <th>Room no</th>
+      <th>Room Size</th>
+      <th>Library</th>
+      <th></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+<tbody>
+
+<%= form_tag(rooms_path, :method => "get", class: "search-form") do %>
+    <%= select_tag(:search0, options_for_select([['Search By', 0], ['Room Number', 1], ['Room Size', 2],['Library', 3], ['Slot Availability',4]], :selected => params[:search0] )) %><br/><br/>
+    <%= text_field_tag :search1, params[:search1], placeholder: "enter room no" %> &nbsp;&nbsp;&nbsp;
+    <%= select_tag(:search2, options_for_select([['',''], ['2 Chairs', 2], ['4 Chairs', 4],['6 Chairs', 6]], :selected => params[:search2] )) %>&nbsp;&nbsp;&nbsp;
+    <%= select_tag(:search3, options_for_select([['',''], ['James.B.Hunt', 'James.B.Hunt'], ['D.H.Hill', 'D.H.Hill']], :selected => params[:search3] ))%>&nbsp;&nbsp;&nbsp;
+    <%= text_field_tag :search4, params[:search4], :class =>'datepicker' %>&nbsp;&nbsp;&nbsp;
+    <%= select_tag(:search5, options_for_select([['0:00-2:00', 0], ['2:00-4:00', 2], ['4:00-6:00', 4], ['6:00-8:00', 6], ['8:00-10:00', 8], ['10:00-12:00', 10], ['12:00-14:00', 12], ['14:00-16:00', 14], ['16:00-18:00', 16], ['18:00-20:00', 18], ['20:00-22:00', 20], ['22:00-0:00', 22]], :selected => params[:search5] ))%>&nbsp;&nbsp;&nbsp;
+    <%= submit_tag "Search" %>
+<% end %>
+
+<% if @rooms%>
+
+    <% @rooms.each do |room| %>
+        <tr>
+          <td><%= room.room_no %></td>
+          <td><%= room.size %></td>
+          <td><%= room.building %></td>
+          <% if current_user %>
+              <% if (@book) %>
+                  <%= params[:search4]%>
+                  <td><%= link_to 'Book Room', create_history_path(room, :date => @date , :slot => @slot) %></td>
+               <% end %>
+          <% end %>
+
+          <% if user_signed_in? %>
+              <% if current_user.try(:admin?) %>
+                  <td><%= link_to 'Edit', edit_room_path(room) %></td><td></td>
+                  <td><%= link_to 'Show History', history_room_path(room) %></td><td></td>
+                  <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td><td></td>
+              <% end %>
+          <% end %>
+        </tr>
+    <% end %>
+<% end %>
+</tbody>
+</table>
+<br>
+<%= link_to 'Back', root_path %>
+<script>
+  $('.datepicker').datepicker({format:'yyyy-mm-dd'});
+</script>

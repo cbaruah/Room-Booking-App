@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Room Reserves</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Room no</th>
+      <th>User</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @room_reserves.each do |room_reserf| %>
+      <tr>
+        <td><%= room_reserf.room_no %></td>
+        <td><%= room_reserf.user_id %></td>
+        <td><%= room_reserf.start_time %></td>
+        <td><%= room_reserf.end_time %></td>
+        <td><%= link_to 'Show', room_reserf %></td>
+        <td><%= link_to 'Edit', edit_room_reserf_path(room_reserf) %></td>
+        <td><%= link_to 'Destroy', room_reserf, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Room reserve', new_room_reserf_path %>
